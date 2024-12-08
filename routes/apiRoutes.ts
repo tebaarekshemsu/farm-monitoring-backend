@@ -9,6 +9,9 @@ import * as setupController from '../controllers/setupController';
 const router = Router();
 
 // Authentication Routes
+router.get("/", (req ,res)=>{
+    res.json("connected");
+})
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 
