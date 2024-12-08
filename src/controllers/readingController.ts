@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import pool from '../config/db';
-import io from '../src/socketHandler';
+import io from '../socketHandler';
 import { Data } from '../models/types';
+import { RequestWithUser } from '../types/RequestWithUser';
 
-export const postReading = async (req: Request, res: Response): Promise<void> => {
+export const postReading = async (req: RequestWithUser, res: Response): Promise<void> => {
   const { device_id, value } = req.body;
 
   // Validate request data

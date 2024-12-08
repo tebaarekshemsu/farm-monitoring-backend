@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import pool from '../config/db';
 import { Device } from '../models/types';
+import { RequestWithUser } from '../types/RequestWithUser';
 
 // Function to register a new device
-export const registerDevice = async (req: Request, res: Response): Promise<void> => {
+export const registerDevice = async (req: RequestWithUser, res: Response): Promise<void> => {
   const { device_id, name, layer, unit, type, critical_high, critical_low } = req.body;
   const userId = req.user?.user_id; // Extracted from authentication middleware
 

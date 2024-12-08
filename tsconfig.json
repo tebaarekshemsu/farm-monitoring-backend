@@ -9,5 +9,5 @@
     "typeRoots": ["./node_modules/@types", "./src/types"], // Include custom types
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "src/types/express.d.ts", "models/types.ts"] // Include all necessary files
+  "include": ["src/**/*", "src/types/express.d.ts", "src/models/types.ts"] // Include all necessary files
 }

@@ -1,5 +1,5 @@
 // src/types/express.d.ts
-import { User } from '../../models/types'; // Adjust the relative path to models/types
+import { User } from '../models/types'; // Adjust the relative path to models/types
 
 declare global {
   namespace Express {

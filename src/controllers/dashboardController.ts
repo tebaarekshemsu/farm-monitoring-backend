@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import pool from '../config/db';
+import pool from '../config/db';import { RequestWithUser } from '../types/RequestWithUser';
+
 
 // Function to fetch the dashboard data
-export const getDashboard = async (req: Request, res: Response): Promise<void> => {
+export const getDashboard = async (req: RequestWithUser, res: Response): Promise<void> => {
   const userId = req.user?.user_id;
 
   if (!userId) {
@@ -25,7 +26,7 @@ export const getDashboard = async (req: Request, res: Response): Promise<void> =
 };
 
 // Function to fetch detailed dashboard data for a specific layer
-export const getDashboardDetail = async (req: Request, res: Response): Promise<void> => {
+export const getDashboardDetail = async (req: RequestWithUser, res: Response): Promise<void> => {
   const userId = req.user?.user_id;
   const { layer } = req.params;
 
