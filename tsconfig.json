@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "target": "es2016",
+    "typeRoots": ["./node_modules/@types", "./src/types"], // Include custom types
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*", "src/types/express.d.ts", "models/types.ts"] // Include all necessary files
+}
