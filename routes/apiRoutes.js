@@ -42,6 +42,9 @@ const readingController = __importStar(require("../controllers/readingController
 const setupController = __importStar(require("../controllers/setupController"));
 const router = (0, express_1.Router)();
 // Authentication Routes
+router.get("/", (req, res) => {
+    res.json("connected");
+});
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 // Dashboard Routes
