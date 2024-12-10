@@ -1,3 +1,4 @@
+// Function to log in an existing user
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -38,7 +39,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     // Check if the user exists
     if (result.rows.length === 0) {
-    res.status(400).json({ error: 'Invalid email or password' });
+      res.status(400).json({ error: 'Invalid email or password' });
+      return;
     }
 
     // Retrieve the user details
@@ -48,20 +50,23 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       res.status(400).json({ error: 'Invalid email or password' });
+      return;
     }
 
     // Generate a JSON Web Token
     const token = jwt.sign(
-      { userId: user.user_id, name: user.name },
-      process.env.JWT_SECRET || 'default_secret', // Provide a fallback for JWT_SECRET
+      { userId: user.user_id, name: user.name },'default_secret', // Provide a fallback for JWT_SECRET
       { expiresIn: '1h' }
     );
 
     // Respond with the token
-    res.status(200).json({ token });
+     res.status(200).json({ token });
+     return;
   } catch (error: any) {
     // Handle potential errors gracefully
     console.error('Error logging in:', error.message);
     res.status(500).json({ error: 'Error logging in' });
+    return;
   }
 };
+ 

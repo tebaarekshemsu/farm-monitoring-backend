@@ -21,7 +21,7 @@ export const authenticateToken = (
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as User;
+    const decoded = jwt.verify(token, 'default_secret') as User;
     req.user = decoded;
     next();
   } catch (err) {

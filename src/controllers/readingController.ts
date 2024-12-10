@@ -10,6 +10,7 @@ export const postReading = async (req: RequestWithUser, res: Response): Promise<
   // Validate request data
   if (!device_id || value === undefined) {
   res.status(400).json({ error: 'Device ID and value are required' });
+  return;
   }
 
   try {
@@ -31,6 +32,7 @@ export const postReading = async (req: RequestWithUser, res: Response): Promise<
 
     if (!device) {
       res.status(404).json({ error: 'Device not found' });
+      return;
     }
 
     const { critical_high, critical_low, type, name, user_id } = device;
@@ -61,14 +63,17 @@ export const postReading = async (req: RequestWithUser, res: Response): Promise<
     });
 
     res.status(201).json({ message: 'Reading saved', data: newData });
+    return;
   } catch (error: any) {
     console.error('Error saving reading:', error.message);
 
     // Handle foreign key constraint errors (e.g., invalid `device_id`)
     if (error.code === '23503') {
        res.status(400).json({ error: 'Invalid device ID' });
+       return;
     }
 
     res.status(500).json({ error: 'Error saving reading' });
+    return;
   }
 };

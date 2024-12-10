@@ -2,16 +2,17 @@ import { RequestWithUser } from '../types/RequestWithUser';
 import { Response } from 'express';
 import pool from '../config/db';
 import { Device } from '../models/types';
+import { type } from 'os';
 
 export const registerDevice = async (req: RequestWithUser, res: Response): Promise<void> => {
   const { device_id, name, layer, unit, type, critical_high, critical_low } = req.body;
   const userId = req.user?.user_id; // Extracted from authentication middleware
 
   // Validate user ID
-  if (!userId) {
-    res.status(401).json({ error: 'Unauthorized access' });
-    return; // Explicitly end the execution here for safety
-  }
+  // if (!userId) {
+  //   res.status(401).json({ error: 'Unauthorized access' });
+  //   return; // Explicitly end the execution here for safety
+  // }
 
   // Validate required fields
   if (!device_id || !name || !layer || !unit || !type) {
@@ -22,7 +23,7 @@ export const registerDevice = async (req: RequestWithUser, res: Response): Promi
   try {
     // Insert the new device into the database
     const result = await pool.query(
-      'INSERT INTO "device" (device_id, name, layer, unit, type, critical_high, critical_low, user_id, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+      'INSERT INTO "device" (device_id, name, layer, unit, type, critical_high, critical_low, user_id, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
       [
         device_id,
         name,
@@ -31,7 +32,6 @@ export const registerDevice = async (req: RequestWithUser, res: Response): Promi
         type,
         critical_high || null,
         critical_low || null,
-        userId,
         type === 'motor' ? 'inactive' : 'active', // Default status based on device type
       ]
     );

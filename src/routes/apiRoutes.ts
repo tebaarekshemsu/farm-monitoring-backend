@@ -29,14 +29,14 @@ router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 
 // Dashboard Routes
-router.get('/dashboard', authenticateToken, dashboardController.getDashboard);
-router.get('/dashboard-detail/:layer', authenticateToken, dashboardController.getDashboardDetail);
+router.get('/dashboard', dashboardController.getDashboard);
+router.get('/dashboard-detail/:layer',  dashboardController.getDashboardDetail);
 
 // Device Routes
-router.post('/device', authenticateToken, deviceController.registerDevice);
+router.post('/device',deviceController.registerDevice);
 
 // Reading Routes
-router.post('/reading', authenticateToken, readingController.postReading);
+router.post('/reading',readingController.postReading);
 
 // Setup and Initialization Routes (Admin/Dev Use)
 router.get('/setup/create-tables', setupController.createTables);

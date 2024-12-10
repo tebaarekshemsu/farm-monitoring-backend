@@ -33,12 +33,14 @@ export const createTables = async (_req: Request, res: Response): Promise<void> 
   try {
     await pool.query(query);
     res.status(200).json({ message: 'Tables created successfully' });
+    return;
   } catch (error: any) {
     console.error('Error creating tables:', error.message);
     res.status(500).json({
       error: 'Error creating tables',
       details: error.message,
     });
+    return;
   }
 };
 
@@ -61,11 +63,13 @@ export const seedDatabase = async (_req: Request, res: Response): Promise<void> 
   try {
     await pool.query(query);
     res.status(200).json({ message: 'Database seeded successfully' });
+    return;
   } catch (error: any) {
     console.error('Error seeding database:', error.message);
     res.status(500).json({
       error: 'Error seeding database',
       details: error.message,
     });
+    return;
   }
 };
