@@ -3,11 +3,20 @@
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "module": "commonjs",
-    "target": "es2016",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "target": "es6",
+    "baseUrl": ".",
     "typeRoots": ["./node_modules/@types", "./src/types"], // Include custom types
     "resolveJsonModule": true
   },
+  "paths": {
+          "*": ["node_modules/*", "src/types/*"]
+      },
   "include": ["src/**/*", "src/types/express.d.ts", "src/models/types.ts"] // Include all necessary files
 }
